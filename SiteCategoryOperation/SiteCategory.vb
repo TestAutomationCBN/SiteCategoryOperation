@@ -17,6 +17,18 @@ Public Class SiteCategory
     ' カテゴリ名
     Public catNm As String
 
+    ' ディレクトリ名
+    Public dirNm As String
+
+    ' カテゴリタイプ
+    Public useCd As String
+
+    ' RSS URL
+    Public useRSS As String
+
+    ' バージョンルール
+    Public versionCnt As String
+
     ' アクションフィールドID01
     Public afieldId_01 As String
 
@@ -70,6 +82,42 @@ Public Class SiteCategory
 
     Public Sub SetcatNm(arg As String)
         Me.catNm = arg
+    End Sub
+
+    ' ディレクトリ名のGetter/Setter
+    Public Function GetdirNm() As String
+        GetdirNm = Me.dirNm
+    End Function
+
+    Public Sub SetdirNm(arg As String)
+        Me.dirNm = arg
+    End Sub
+
+    ' カテゴリタイプのGetter/Setter
+    Public Function GetuseCd() As String
+        GetuseCd = Me.useCd
+    End Function
+
+    Public Sub SetuseCd(arg As String)
+        Me.useCd = arg
+    End Sub
+
+    ' RSS URLのGetter/Setter
+    Public Function GetuseRSS() As String
+        GetuseRSS = Me.useRSS
+    End Function
+
+    Public Sub SetuseRSS(arg As String)
+        Me.useRSS = arg
+    End Sub
+
+    ' バージョンルールのGetter/Setter
+    Public Function GetversionCnt() As String
+        GetversionCnt = Me.versionCnt
+    End Function
+
+    Public Sub SetversionCnt(arg As String)
+        Me.versionCnt = arg
     End Sub
 
     ' アクションフィールドID01のGetter/Setter
