@@ -106,7 +106,7 @@ Public Class UtillFunc
     Public Sub SiteCategoryListtoTest(project As String, catList As ArrayList, export_filepath As String)
 
         '雛形ファイルを開く
-        Dim base As New ClosedXML.Excel.XLWorkbook(My.Application.Info.DirectoryPath & "\TestBase\con_base.xlsx")
+        Dim base As New ClosedXML.Excel.XLWorkbook(My.Application.Info.DirectoryPath & "\TestBase\site_base.xlsx")
 
         'シートを取得
         Dim sheet As ClosedXML.Excel.IXLWorksheet = base.Worksheet("サイトカテゴリ")
@@ -151,7 +151,7 @@ Public Class UtillFunc
         Next
 
         '保存
-        base.SaveAs(export_filepath & "\テスト仕様書.xlsx")
+        base.SaveAs(export_filepath & "\サイトカテゴリテスト仕様書.xlsx")
 
     End Sub
 
