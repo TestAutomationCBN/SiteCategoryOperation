@@ -2,7 +2,7 @@
 
 Public Class SiteCategoryOperation
 
-    '設計書のパス格納用変数ああああ
+    '設計書のパス格納用変数
     Private ddpath = ""
     'エクスポートしたXMLファイルのパス格納用変数
     Private exported_xmlpath = ""
