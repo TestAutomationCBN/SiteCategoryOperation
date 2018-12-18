@@ -138,7 +138,7 @@ Public Class UtillFunc
         For Each cat As SiteCategory In catList
             count = count + 1
 
-            sheet.Cell("A" & (count + 9)).Value = "CC_" & count 'テストID
+            sheet.Cell("A" & (count + 9)).Value = "SC_" & count 'テストID
             sheet.Cell("B" & (count + 9)).Value = cat.catNm 'カテゴリ名
             sheet.Cell("C" & (count + 9)).Value = cat.catId 'カテゴリID
             sheet.Cell("D" & (count + 9)).Value = "サイトカテゴリ設計書通り設定されている" '期待結果
