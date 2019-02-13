@@ -30,9 +30,9 @@ Public Class UtillFunc
                 Dim list As New ArrayList
 
                 '親カテゴリID, カテゴリ名以外の基本情報を格納
-                cat.SetcatUrl(ws.Cell(cnt, 2).Value)
-                cat.SetfileServerUrl(ws.Cell(cnt, 3).Value)
-                cat.SetcatId(ws.Cell(cnt, 4).Value)
+                cat.SetcatId(ws.Cell(cnt, 2).Value)
+                cat.SetcatUrl(ws.Cell(cnt, 3).Value)
+                cat.SetfileServerUrl(ws.Cell(cnt, 4).Value)
                 cat.SetorderLnNo(ws.Cell(cnt, 5).Value)
                 cat.SetbgColor(ws.Cell(cnt, 6).Value)
                 cat.SetcharSetCd(ws.Cell(cnt, 7).Value)
