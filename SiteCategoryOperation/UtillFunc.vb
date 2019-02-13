@@ -83,7 +83,20 @@ Public Class UtillFunc
     ' サイトカテゴリリストから、XMLファイルを生成する関数
     Public Sub SiteCategoryListtoXML(catList As ArrayList, export_filepath As String)
 
-        Dim sw As New System.IO.StreamWriter(export_filepath & "\site_category.xml", False, System.Text.Encoding.GetEncoding("utf-8"))
+        Dim fileName As String = "\site_category"
+
+        '保存しようとしたファイル名と既に同じファイル名が存在するならば、ファイル名末尾に(k)をつける
+        If Dir(export_filepath & fileName & ".xml") <> "" Then
+            Dim k As Integer
+            k = 1
+
+            While Dir(export_filepath & fileName & ".xml") <> ""
+                fileName = "\site_category" & " (" & k & ")"
+                k += 1
+            End While
+        End If
+
+        Dim sw As New System.IO.StreamWriter(export_filepath & fileName & ".xml", False, System.Text.Encoding.GetEncoding("utf-8"))
 
         sw.Write("<?xml version=""1.0"" encoding=""UTF-8""?>" & vbCrLf)
         sw.Write("<root>" & vbCrLf)
@@ -170,8 +183,21 @@ Public Class UtillFunc
             sheet.Cell("J" & (count + 9)).Value = "" '備考
         Next
 
+        Dim fileName As String = "\サイトカテゴリテスト仕様書"
+
+        '保存しようとしたファイル名と既に同じファイル名が存在するならば、ファイル名末尾に(k)をつける
+        If Dir(export_filepath & fileName & ".xlsx") <> "" Then
+            Dim k As Integer
+            k = 1
+
+            While Dir(export_filepath & fileName & ".xlsx") <> ""
+                fileName = "\サイトカテゴリテスト仕様書" & " (" & k & ")"
+                k += 1
+            End While
+        End If
+
         '保存
-        base.SaveAs(export_filepath & "\サイトカテゴリテスト仕様書.xlsx")
+        base.SaveAs(export_filepath & fileName & ".xlsx")
 
     End Sub
 
