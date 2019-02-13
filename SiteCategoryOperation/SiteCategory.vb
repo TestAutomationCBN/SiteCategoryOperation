@@ -2,6 +2,12 @@
 
 Public Class SiteCategory
 
+    ' サイトURL
+    Public catUrl As String
+
+    ' ファイルサーバのURL
+    Public fileServerUrl As String
+
     ' カテゴリ色
     Public bgColor As String
 
@@ -23,6 +29,9 @@ Public Class SiteCategory
     ' カテゴリタイプ
     Public useCd As String
 
+    ' 文字セット
+    Public charSetCd As String
+
     ' RSS URL
     Public useRSS As String
 
@@ -38,6 +47,25 @@ Public Class SiteCategory
     ' アクションフィールドID03
     Public afieldId_03 As String
 
+
+
+    ' サイトURLのGetter/Setter
+    Public Function GetcatUrl() As String
+        GetcatUrl = Me.catUrl
+    End Function
+
+    Public Sub SetcatUrl(arg As String)
+        Me.catUrl = arg
+    End Sub
+
+    ' ファイルサーバのURLのGetter/Setter
+    Public Function GetfileServerUrl() As String
+        GetfileServerUrl = Me.fileServerUrl
+    End Function
+
+    Public Sub SetfileServerUrl(arg As String)
+        Me.fileServerUrl = arg
+    End Sub
 
     ' カテゴリ色のGetter/Setter
     Public Function GetbgColor() As String
@@ -100,6 +128,15 @@ Public Class SiteCategory
 
     Public Sub SetuseCd(arg As String)
         Me.useCd = arg
+    End Sub
+
+    ' 文字セットのGetter/Setter
+    Public Function GetcharSetCd() As String
+        GetcharSetCd = Me.charSetCd
+    End Function
+
+    Public Sub SetcharSetCd(arg As String)
+        Me.charSetCd = arg
     End Sub
 
     ' RSS URLのGetter/Setter
