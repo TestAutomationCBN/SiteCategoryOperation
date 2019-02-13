@@ -50,7 +50,7 @@ Public Class UtillFunc
                 Dim search As Integer
                 search = cnt
                 Dim i As Integer
-                i = 10
+                i = 12
 
                 While i <= 20
                     If i = 12 Then
