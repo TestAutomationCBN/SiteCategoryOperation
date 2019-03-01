@@ -47,6 +47,9 @@ Public Class SiteCategory
     ' アクションフィールドID03
     Public afieldId_03 As String
 
+    'メタ情報のリスト
+    Public metaList As ArrayList
+
 
 
     ' サイトURLのGetter/Setter
@@ -184,4 +187,61 @@ Public Class SiteCategory
         Me.afieldId_03 = arg
     End Sub
 
+
+
+End Class
+
+Public Class Meta
+
+    'メタ情報関連
+
+
+    'メタ情報名
+    Public metaNm As String
+
+    'メタ情報ID
+    Public metaId As String
+
+    'メタ情報のタイプ
+    Public metaType As String
+
+    'メタ情報値
+    Public metaValue As String
+
+
+    ' メタ情報名のGetter/Setter
+    Public Function GetmetaNm() As String
+        GetmetaNm = Me.metaNm
+    End Function
+
+    Public Sub SetmetaNm(arg As String)
+        Me.metaNm = arg
+    End Sub
+
+    ' メタ情報IDのGetter/Setter
+    Public Function GetmetaId() As String
+        GetmetaId = Me.metaId
+    End Function
+
+    Public Sub SetmetaId(arg As String)
+        Me.metaId = arg
+    End Sub
+
+    ' メタ情報のタイプのGetter/Setter
+    Public Function GetmetaType() As String
+        GetmetaType = Me.metaType
+    End Function
+
+    Public Sub SetmetaType(arg As String)
+        Me.metaType = arg
+    End Sub
+
+    ' メタ情報値のGetter/Setter
+    Public Function GetmetaValue() As String
+        GetmetaValue = Me.metaValue
+    End Function
+
+    Public Sub SetmetaValue(arg As String)
+        Me.metaValue = arg
+    End Sub
 End Class
