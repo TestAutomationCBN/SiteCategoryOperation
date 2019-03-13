@@ -130,8 +130,16 @@ Public Class UtillFunc
             sw.Write("        <catNm><![CDATA[" & cat.GetcatNm & "]]></catNm>" & vbCrLf)
             sw.Write("        <phyDirNm><![CDATA[" & cat.GetdirNm & "]]></phyDirNm>" & vbCrLf)
             sw.Write("        <catExp/>" & vbCrLf)
-            sw.Write("        <catUrl><![CDATA[" & cat.GetcatUrl & "]]></catUrl>" & vbCrLf)
-            sw.Write("        <fileServerUrl><![CDATA[" & cat.GetfileServerUrl & "]]></fileServerUrl>" & vbCrLf)
+            If cat.GetcatUrl <> "" Then
+                sw.Write("        <catUrl><![CDATA[" & cat.GetcatUrl & "]]></catUrl>" & vbCrLf)
+            Else
+                sw.Write("        <catUrl/>" & vbCrLf)
+            End If
+            If cat.GetfileServerUrl <> "" Then
+                sw.Write("        <fileServerUrl><![CDATA[" & cat.GetfileServerUrl & "]]></fileServerUrl>" & vbCrLf)
+            Else
+                sw.Write("        <fileServerUrl/>" & vbCrLf)
+            End If
             If cat.GetafieldId_01 <> "" Or cat.GetafieldId_02 <> "" Or cat.GetafieldId_03 <> "" Then
                 sw.Write("        <afields>" & vbCrLf)
                 If cat.GetafieldId_01 <> "" Then
@@ -155,7 +163,7 @@ Public Class UtillFunc
                     sw.Write("                <dvalue><![CDATA[" & meta.GetmetaValue & "]]></dvalue>" & vbCrLf)
                     sw.Write("            </metafield>" & vbCrLf)
                 Next
-                sw.Write("        </metafield>" & vbCrLf)
+                sw.Write("        </metafields>" & vbCrLf)
             Else
                 sw.Write("        <metafields/>" & vbCrLf)
             End If
