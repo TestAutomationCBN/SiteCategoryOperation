@@ -50,6 +50,9 @@ Public Class SiteCategory
     'メタ情報のリスト
     Public metaList As ArrayList
 
+    'コンテンツ自動読み込みのリスト
+    Public conList As ArrayList
+
 
 
     ' サイトURLのGetter/Setter
@@ -244,4 +247,22 @@ Public Class Meta
     Public Sub SetmetaValue(arg As String)
         Me.metaValue = arg
     End Sub
+End Class
+
+Public Class ConRead
+
+    'コンテンツ自動読み込み関連
+
+    'コンテンツカテゴリID
+    Public conId As String
+
+    ' コンテンツカテゴリIDのGetter/Setter
+    Public Function GetconId() As String
+        GetconId = Me.conId
+    End Function
+
+    Public Sub SetconId(arg As String)
+        Me.conId = arg
+    End Sub
+
 End Class

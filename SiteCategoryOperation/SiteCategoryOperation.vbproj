@@ -173,9 +173,7 @@
     <Content Include="TestBase\site_base.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ツール専用サイトカテゴリ設計書.xlsx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <None Include="ツール専用サイトカテゴリ設計書.xlsm" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">

@@ -10,7 +10,7 @@ Public Class UtillFunc
 
         '開始行
         Dim cnt As Integer
-        cnt = 15
+        cnt = 16
 
         '処理終了フラグ
         Dim exeflg As Boolean
@@ -23,6 +23,7 @@ Public Class UtillFunc
         Using wb
             Dim ws = wb.Worksheet("サイトカテゴリ設計")
             Dim wsMeta = wb.Worksheet("メタ情報設定値一覧")
+            Dim wsCon = wb.Worksheet("コンテンツ読込設定")
 
             ' 行情報をCategoryクラスに変換
             While ws.Cell(cnt, 12).Value <> "" Or ws.Cell(cnt, 13).Value <> "" Or ws.Cell(cnt, 14).Value <> "" Or ws.Cell(cnt, 15).Value <> "" Or ws.Cell(cnt, 16).Value <> "" Or ws.Cell(cnt, 17).Value <> "" Or ws.Cell(cnt, 18).Value <> "" Or ws.Cell(cnt, 19).Value <> "" Or ws.Cell(cnt, 20).Value <> ""
@@ -87,10 +88,29 @@ Public Class UtillFunc
                     End If
 
                     metaLine += 1
-                    Debug.WriteLine(meta.metaNm)
                 End While
 
                 cat.metaList = mList
+
+                'コンテンツ読込情報の取得
+                'コンテンツ読込設定シートの行
+                Dim conLine As Integer
+                conLine = 13
+                Dim cList As New ArrayList
+                While wsMeta.Cell(conLine, 2).Value <> ""
+
+                    Dim conRead As New ConRead
+
+                    If wsCon.Cell(conLine, 2).Value = cat.GetcatId Then
+                        conRead.SetconId(wsCon.Cell(conLine, 3).Value)
+
+                        cList.Add(conRead)
+                    End If
+
+                    conLine += 1
+                End While
+
+                cat.conList = cList
                 cnt += 1
 
                 'サイトカテゴリリストに作成したカテゴリ情報を格納
@@ -167,7 +187,15 @@ Public Class UtillFunc
             Else
                 sw.Write("        <metafields/>" & vbCrLf)
             End If
-            sw.Write("        <forwardcats/>" & vbCrLf)
+            If cat.conList.Count <> 0 Then
+                sw.Write("        <forwardcats>" & vbCrLf)
+                For Each conRead In cat.conList
+                    sw.Write("            <forwardcat catId=""" & conRead.GetconId & """ expireDays=""9999"" operDays=""0"" priority=""5"" useFlg=""T""/" & vbCrLf)
+                Next
+                sw.Write("        </forwardcats>" & vbCrLf)
+            Else
+                sw.Write("        <forwardcats/>" & vbCrLf)
+            End If
             sw.Write("        <deliverycats/>" & vbCrLf)
             sw.Write("    </category>" & vbCrLf)
         Next
