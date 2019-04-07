@@ -10,7 +10,7 @@ Public Class UtillFunc
 
         '開始行
         Dim cnt As Integer
-        cnt = 13
+        cnt = 16
 
         '処理終了フラグ
         Dim exeflg As Boolean
@@ -22,6 +22,8 @@ Public Class UtillFunc
 
         Using wb
             Dim ws = wb.Worksheet("サイトカテゴリ設計")
+            Dim wsMeta = wb.Worksheet("メタ情報設定値一覧")
+            Dim wsCon = wb.Worksheet("コンテンツ読込設定")
 
             ' 行情報をCategoryクラスに変換
             While ws.Cell(cnt, 12).Value <> "" Or ws.Cell(cnt, 13).Value <> "" Or ws.Cell(cnt, 14).Value <> "" Or ws.Cell(cnt, 15).Value <> "" Or ws.Cell(cnt, 16).Value <> "" Or ws.Cell(cnt, 17).Value <> "" Or ws.Cell(cnt, 18).Value <> "" Or ws.Cell(cnt, 19).Value <> "" Or ws.Cell(cnt, 20).Value <> ""
@@ -67,6 +69,48 @@ Public Class UtillFunc
                     i += 1
                 End While
 
+                'メタ情報の取得
+                'メタ情報シートの行
+                Dim metaLine As Integer
+                metaLine = 13
+                Dim mList As New ArrayList
+                While wsMeta.Cell(metaLine, 2).Value <> ""
+
+                    Dim meta As New Meta
+
+                    If wsMeta.Cell(metaLine, 2).Value = cat.GetcatId Then
+                        meta.SetmetaNm(wsMeta.Cell(metaLine, 3).Value)
+                        meta.SetmetaId(wsMeta.Cell(metaLine, 4).Value)
+                        meta.SetmetaType(wsMeta.Cell(metaLine, 5).Value)
+                        meta.SetmetaValue(wsMeta.Cell(metaLine, 6).Value)
+
+                        mList.Add(meta)
+                    End If
+
+                    metaLine += 1
+                End While
+
+                cat.metaList = mList
+
+                'コンテンツ読込情報の取得
+                'コンテンツ読込設定シートの行
+                Dim conLine As Integer
+                conLine = 13
+                Dim cList As New ArrayList
+                While wsMeta.Cell(conLine, 2).Value <> ""
+
+                    Dim conRead As New ConRead
+
+                    If wsCon.Cell(conLine, 2).Value = cat.GetcatId Then
+                        conRead.SetconId(wsCon.Cell(conLine, 3).Value)
+
+                        cList.Add(conRead)
+                    End If
+
+                    conLine += 1
+                End While
+
+                cat.conList = cList
                 cnt += 1
 
                 'サイトカテゴリリストに作成したカテゴリ情報を格納
@@ -106,8 +150,16 @@ Public Class UtillFunc
             sw.Write("        <catNm><![CDATA[" & cat.GetcatNm & "]]></catNm>" & vbCrLf)
             sw.Write("        <phyDirNm><![CDATA[" & cat.GetdirNm & "]]></phyDirNm>" & vbCrLf)
             sw.Write("        <catExp/>" & vbCrLf)
-            sw.Write("        <catUrl><![CDATA[" & cat.GetcatUrl & "]]></catUrl>" & vbCrLf)
-            sw.Write("        <fileServerUrl><![CDATA[" & cat.GetfileServerUrl & "]]></fileServerUrl>" & vbCrLf)
+            If cat.GetcatUrl <> "" Then
+                sw.Write("        <catUrl><![CDATA[" & cat.GetcatUrl & "]]></catUrl>" & vbCrLf)
+            Else
+                sw.Write("        <catUrl/>" & vbCrLf)
+            End If
+            If cat.GetfileServerUrl <> "" Then
+                sw.Write("        <fileServerUrl><![CDATA[" & cat.GetfileServerUrl & "]]></fileServerUrl>" & vbCrLf)
+            Else
+                sw.Write("        <fileServerUrl/>" & vbCrLf)
+            End If
             If cat.GetafieldId_01 <> "" Or cat.GetafieldId_02 <> "" Or cat.GetafieldId_03 <> "" Then
                 sw.Write("        <afields>" & vbCrLf)
                 If cat.GetafieldId_01 <> "" Then
@@ -123,8 +175,27 @@ Public Class UtillFunc
             Else
                 sw.Write("        <afields/>" & vbCrLf)
             End If
-            sw.Write("        <metafields/>" & vbCrLf)
-            sw.Write("        <forwardcats/>" & vbCrLf)
+            If cat.metaList.Count <> 0 Then
+                sw.Write("        <metafields>" & vbCrLf)
+                For Each meta In cat.metaList
+                    sw.Write("            <metafield metaId=""" & meta.GetmetaId & """ typeCd=""" & meta.GetmetaType & """>" & vbCrLf)
+                    sw.Write("                <metaNm><![CDATA[" & meta.GetmetaNm & "]]></metaNm>" & vbCrLf)
+                    sw.Write("                <dvalue><![CDATA[" & meta.GetmetaValue & "]]></dvalue>" & vbCrLf)
+                    sw.Write("            </metafield>" & vbCrLf)
+                Next
+                sw.Write("        </metafields>" & vbCrLf)
+            Else
+                sw.Write("        <metafields/>" & vbCrLf)
+            End If
+            If cat.conList.Count <> 0 Then
+                sw.Write("        <forwardcats>" & vbCrLf)
+                For Each conRead In cat.conList
+                    sw.Write("            <forwardcat catId=""" & conRead.GetconId & """ expireDays=""9999"" operDays=""0"" priority=""5"" useFlg=""T""/" & vbCrLf)
+                Next
+                sw.Write("        </forwardcats>" & vbCrLf)
+            Else
+                sw.Write("        <forwardcats/>" & vbCrLf)
+            End If
             sw.Write("        <deliverycats/>" & vbCrLf)
             sw.Write("    </category>" & vbCrLf)
         Next

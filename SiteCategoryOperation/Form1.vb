@@ -86,7 +86,6 @@ Public Class SiteCategoryOperation
             Call CreateImportXML(ddpath, export_filepath)
 
             MsgBox("インポートXMLを作成しました。")
-            Me.Close()
         End If
 
 
@@ -97,7 +96,6 @@ Public Class SiteCategoryOperation
             Call CreateTestSpecification(ddpath, export_filepath)
 
             MsgBox("テスト仕様書を作成しました。")
-            Me.Close()
         End If
 
         '【テスト実施処理】
@@ -107,7 +105,6 @@ Public Class SiteCategoryOperation
             Call TestExecute(ddpath, exported_xmlpath, export_filepath)
 
             MsgBox("テストを実施し、テスト仕様書を作成しました。")
-            Me.Close()
         End If
 
     End Sub

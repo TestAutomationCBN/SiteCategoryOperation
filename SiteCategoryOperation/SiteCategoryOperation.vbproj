@@ -169,13 +169,15 @@
     </None>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <Content Include="README.txt" />
+    <Content Include="README.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestBase\site_base.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ツール専用サイトカテゴリ設計書.xlsx">
+    <None Include="ツール専用サイトカテゴリ設計書.xlsm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
