@@ -190,7 +190,7 @@ Public Class UtillFunc
             If cat.conList.Count <> 0 Then
                 sw.Write("        <forwardcats>" & vbCrLf)
                 For Each conRead In cat.conList
-                    sw.Write("            <forwardcat catId=""" & conRead.GetconId & """ expireDays=""9999"" operDays=""0"" priority=""5"" useFlg=""T""/" & vbCrLf)
+                    sw.Write("            <forwardcat catId=""" & conRead.GetconId & """ expireDays=""9999"" operDays=""0"" priority=""5"" useFlg=""T""/>" & vbCrLf)
                 Next
                 sw.Write("        </forwardcats>" & vbCrLf)
             Else
